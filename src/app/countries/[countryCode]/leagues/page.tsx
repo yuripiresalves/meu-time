@@ -1,6 +1,7 @@
 import { LeagueOption } from "@/components/LeagueOption";
 import { api } from "@/lib/api";
-import { cookies } from "next/headers";
+import { getCookie } from "cookies-next";
+import { redirect } from "next/navigation";
 
 interface League {
   name: string;
@@ -17,7 +18,13 @@ export default async function Leagues({
 }: {
   params: { countryCode: string };
 }) {
-  const token = cookies().get("@meu-time:token-1.0.0")?.value;
+  // const isAuthenticated = getCookie("@meu-time:token-1.0.0");
+
+  // if (!isAuthenticated) {
+  //   redirect("/");
+  // }
+
+  const token = getCookie("@meu-time:token-1.0.0");
 
   const response = await api.get(`/leagues?code=${params.countryCode}`, {
     headers: {
@@ -25,18 +32,18 @@ export default async function Leagues({
     },
   });
 
-  const leagues: LeaguesResponse[] = response.data.response;
+  const leaguesResponse: LeaguesResponse[] = response.data.response;
 
   return (
     <div className="space-y-5 pb-16">
       <h2 className="text-2xl font-bold">Escolha a liga:</h2>
       <div className="flex flex-wrap justify-start gap-4">
-        {leagues.map((league) => (
+        {leaguesResponse.map((leagueResponse) => (
           <LeagueOption
-            key={league.league.id}
-            name={league.league.name}
-            id={league.league.id}
-            logo={league.league.logo}
+            key={leagueResponse.league.id}
+            name={leagueResponse.league.name}
+            id={leagueResponse.league.id}
+            logo={leagueResponse.league.logo}
             countryCode={params.countryCode}
           />
         ))}

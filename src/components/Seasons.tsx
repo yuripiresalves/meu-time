@@ -1,9 +1,10 @@
-import { cookies } from "next/headers";
+import { getCookie } from "cookies-next";
+
 import { SeasonOption } from "./SeasonOption";
 import { api } from "@/lib/api";
 
 export async function Seasons() {
-  const token = cookies().get("@meu-time:token-1.0.0")?.value;
+  const token = getCookie("@meu-time:token-1.0.0");
 
   const response = await api.get("/leagues/seasons", {
     headers: {

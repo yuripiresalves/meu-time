@@ -3,12 +3,12 @@
 import { FormEvent, useState } from "react";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
-import { LoadingSpin } from "./LoadingSpin";
+import { Spin } from "./Spin";
 import { api } from "@/lib/api";
 
 export function SignInForm() {
   const [apiKey, setApiKey] = useState("");
-  const [error, setError] = useState<null | Boolean>(null);
+  const [error, setError] = useState({} as { type: string | null });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -16,25 +16,43 @@ export function SignInForm() {
     setLoading(true);
     event.preventDefault();
 
-    const response = await api.get("/timezone", {
-      headers: {
-        "x-rapidapi-key": apiKey,
-      },
-    });
+    try {
+      const response = await api.get("/timezone", {
+        headers: {
+          "x-rapidapi-key": apiKey,
+        },
+      });
 
-    if (response.data.errors.token) {
-      setError(true);
+      if (response.data.errors.token) {
+        setError({
+          type: "token",
+        });
+        setLoading(false);
+
+        return;
+      }
+
+      if (response.data.errors.requests) {
+        setError({
+          type: "requests",
+        });
+        setLoading(false);
+
+        return;
+      }
+
+      setCookie("@meu-time:token-1.0.0", apiKey, {
+        maxAge: 60 * 60 * 24 * 30, //30 days
+      });
+
       setLoading(false);
-
-      return;
+      router.push("/countries");
+    } catch (error) {
+      console.error(error);
+      setError({ type: "unexpected" });
+    } finally {
+      setLoading(false);
     }
-
-    setCookie("@meu-time:token-1.0.0", apiKey, {
-      maxAge: 60 * 60 * 24 * 30, //30 days
-    });
-
-    setLoading(false);
-    router.push("/countries");
   }
 
   return (
@@ -42,7 +60,7 @@ export function SignInForm() {
       onSubmit={SignIn}
       className="flex min-w-[400px] max-w-[400px] flex-col gap-6 rounded-lg border border-neutral-700 bg-neutral-800 p-10"
     >
-      {error && (
+      {error.type === "token" ? (
         <span className="text-sm text-red-400">
           API Key inválida! Para obter uma API Key válida acesse{" "}
           <a
@@ -55,17 +73,23 @@ export function SignInForm() {
           </a>{" "}
           e crie uma conta gratuita!
         </span>
+      ) : (
+        error.type === "requests" && (
+          <span className="text-sm text-red-400">
+            Número máximo de requisições atingido!
+          </span>
+        )
       )}
       <input
         type="text"
         value={apiKey}
         onChange={(event) => {
-          setError(null);
+          setError({ type: null });
           setApiKey(event.target.value);
         }}
         placeholder="Digite sua API Key..."
         className={`rounded-lg border border-neutral-500 p-4 text-neutral-800 placeholder:font-alt placeholder:italic placeholder:text-neutral-500 ${
-          error && "border-none ring-1 ring-red-500"
+          error.type && "border-none ring-1 ring-red-500"
         }`}
       />
       <button
@@ -75,7 +99,7 @@ export function SignInForm() {
       >
         {loading ? (
           <span className="flex items-center gap-2">
-            <LoadingSpin /> Carregando
+            <Spin /> Carregando
           </span>
         ) : (
           "Entrar"

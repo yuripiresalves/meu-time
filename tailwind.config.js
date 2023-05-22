@@ -14,6 +14,9 @@ module.exports = {
       backgroundImage: {
         blur: "url(/bg.svg)",
       },
+      animation: {
+        "spin-slow": "spin 3s linear infinite",
+      },
     },
   },
   plugins: [],

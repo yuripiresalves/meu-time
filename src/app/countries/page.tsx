@@ -1,18 +1,49 @@
-import { CountriesSection } from "@/components/CountriesSection";
-import { cookies } from "next/headers";
+import { getCookie } from "cookies-next";
+
 import { redirect } from "next/navigation";
 
-export default function Countries() {
-  const isAuthenticated = cookies().has("@meu-time:token-1.0.0");
+import { api } from "@/lib/api";
+import { CountryOption } from "../../components/CountryOption";
+import { Seasons } from "@/components/Seasons";
 
-  if (!isAuthenticated) {
-    redirect("/");
-  }
+interface Country {
+  name: string;
+  code: string;
+  flag: string;
+}
+
+export default async function Countries() {
+  // const isAuthenticated = getCookie("@meu-time:token-1.0.0");
+
+  // if (!isAuthenticated) {
+  //   redirect("/");
+  // }
+
+  const token = getCookie("@meu-time:token-1.0.0");
+
+  const response = await api.get("/countries", {
+    headers: {
+      "x-rapidapi-key": token,
+    },
+  });
+
+  const countries: Country[] = response.data.response;
 
   return (
-    <>
+    <div className="space-y-5 pb-16">
       {/* @ts-expect-error Async Server Component */}
-      <CountriesSection />
-    </>
+      <Seasons />
+      <h2 className="text-2xl font-bold">Escolha o país:</h2>
+      <div className="flex flex-wrap justify-start gap-4">
+        {countries.map((country) => (
+          <CountryOption
+            key={country.code}
+            name={country.name}
+            code={country.code}
+            flag={country.flag}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
