@@ -17,7 +17,12 @@ interface Team {
 export default async function Team({
   params,
 }: {
-  params: { countryCode: string; leagueId: string; teamId: string };
+  params: {
+    countryCode: string;
+    seasonYear: string;
+    leagueId: string;
+    teamId: string;
+  };
 }) {
   // const isAuthenticated = getCookie("@meu-time:token-1.0.0");
 
@@ -48,18 +53,23 @@ export default async function Team({
         />
         <h2 className="text-2xl font-bold">{team?.name || "Corinthians"}</h2>
       </div>
-      <div className="flex flex-wrap justify-start gap-10">
+      <div className="flex flex-wrap justify-center gap-10 pt-8 lg:justify-start">
         {/* @ts-expect-error Async Server Component */}
-        <PlayersList />
+        <PlayersList seasonYear={params.seasonYear} teamId={params.teamId} />
 
         <div className="flex w-[350px] flex-col gap-10">
           <ResultsTable />
           {/* @ts-expect-error Async Server Component */}
-          <MostUsedFormation />
+          <MostUsedFormation
+            leagueId={params.leagueId}
+            seasonYear={params.seasonYear}
+            teamId={params.teamId}
+          />
         </div>
 
-        <div className="flex-1 rounded-lg bg-neutral-800">
-          <GoalsChart />
+        <div className="flex w-full max-w-[472px] items-center justify-center rounded-lg bg-neutral-800 p-4">
+          {/* @ts-expect-error Async Server Component */}
+          <GoalsChart leagueId={params.leagueId} teamId={params.teamId} />
         </div>
       </div>
     </div>

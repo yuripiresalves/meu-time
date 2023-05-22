@@ -2,6 +2,7 @@ import { api } from "@/lib/api";
 import { getCookie } from "cookies-next";
 
 interface MostUsedFormationProps {
+  seasonYear: string;
   teamId: string;
   leagueId: string;
 }
@@ -14,51 +15,56 @@ interface Lineups {
 export async function MostUsedFormation({
   teamId,
   leagueId,
+  seasonYear,
 }: MostUsedFormationProps) {
   const token = getCookie("@meu-time:token-1.0.0");
-
-  const lineupsResponse = await api.get(
-    `/teams/statistics?team=${teamId}&league=${leagueId}&season=XXX`,
-    {
-      headers: {
-        "x-rapidapi-key": token,
-      },
-    }
-  );
-
-  // const lineups: Lineups[] = lineupsResponse.data.response.lineups
-  const lineups = [
-    {
-      formation: "4-2-3-1",
-      played: 32,
-    },
-    {
-      formation: "3-4-1-2",
-      played: 40,
-    },
-    {
-      formation: "3-4-2-1",
-      played: 1,
-    },
-    {
-      formation: "4-3-1-2",
-      played: 1,
-    },
-  ];
-  let mostPlayed = 0;
   let mostPlayedFormation = "";
 
-  for (const lineup of lineups) {
-    if (lineup.played > mostPlayed) {
-      mostPlayed = lineup.played;
-      mostPlayedFormation = lineup.formation;
+  try {
+    const lineupsResponse = await api.get(
+      `/teams/statistics?team=${teamId}&league=${leagueId}&season=${seasonYear}}`,
+      {
+        headers: {
+          "x-rapidapi-key": token,
+        },
+      }
+    );
+
+    const lineups: Lineups[] = lineupsResponse.data.response.lineups;
+    // const lineups = [
+    //   {
+    //     formation: "4-2-3-1",
+    //     played: 32,
+    //   },
+    //   {
+    //     formation: "3-4-1-2",
+    //     played: 40,
+    //   },
+    //   {
+    //     formation: "3-4-2-1",
+    //     played: 1,
+    //   },
+    //   {
+    //     formation: "4-3-1-2",
+    //     played: 1,
+    //   },
+    // ];
+    let mostPlayed = 0;
+
+    for (const lineup of lineups) {
+      if (lineup.played > mostPlayed) {
+        mostPlayed = lineup.played;
+        mostPlayedFormation = lineup.formation;
+      }
     }
+  } catch (error) {
+    console.log(error);
   }
 
   return (
-    <p className="text-lg">
+    <p>
       Formação mais utilizada:{" "}
-      <span className="font-bold">{mostPlayedFormation}</span>
+      <span className="text-lg font-bold">{mostPlayedFormation}</span>
     </p>
   );
 }

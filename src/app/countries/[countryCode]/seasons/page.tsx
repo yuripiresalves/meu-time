@@ -1,9 +1,9 @@
 import { getCookie } from "cookies-next";
 
-import { SeasonOption } from "./SeasonOption";
 import { api } from "@/lib/api";
+import { SeasonOption } from "@/components/SeasonOption";
 
-export async function Seasons() {
+export default async function Seasons() {
   const token = getCookie("@meu-time:token-1.0.0");
 
   const response = await api.get("/leagues/seasons", {
@@ -22,9 +22,9 @@ export async function Seasons() {
   });
 
   return (
-    <div className="mt-24 space-y-5 bg-neutral-900 py-10">
+    <div className="space-y-5 bg-neutral-900">
       <h1 className="font-sans text-2xl font-bold">Escolha a temporada:</h1>
-      <div className="flex flex-wrap justify-start gap-4">
+      <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
         {seasons.map((season) => (
           <SeasonOption key={season} year={season} />
         ))}

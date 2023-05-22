@@ -14,21 +14,31 @@ interface PlayerResponse {
 
 interface PlayersListProps {
   teamId: string;
+  seasonYear: string;
 }
 
-export async function PlayersList({ teamId }: PlayersListProps) {
+export async function PlayersList({ teamId, seasonYear }: PlayersListProps) {
   const token = getCookie("@meu-time:token-1.0.0");
 
-  const playersResponse = await api.get(`/players?team=${teamId}&season=XXX`, {
-    headers: {
-      "x-rapidapi-key": token,
-    },
-  });
+  let players: PlayerResponse[] = [];
 
-  const players: PlayerResponse[] = playersResponse.data.response;
+  try {
+    const playersResponse = await api.get(
+      `/players?team=${teamId}&season=${seasonYear}`,
+      {
+        headers: {
+          "x-rapidapi-key": token,
+        },
+      }
+    );
+
+    players = playersResponse.data.response;
+  } catch (error) {
+    console.log(error);
+  }
 
   return (
-    <div className="relative h-96 max-w-[340px] overflow-scroll">
+    <div className="relative -z-10 h-96 max-w-[340px] overflow-y-scroll">
       <table className="w-full border-collapse">
         <thead className="text-left">
           <th className="sticky top-0 rounded-tl-lg bg-indigo-800 p-4">Nome</th>
@@ -38,17 +48,19 @@ export async function PlayersList({ teamId }: PlayersListProps) {
           </th>
         </thead>
         <tbody>
-          <tr>
-            <td className="border-t-2 border-t-neutral-700 bg-neutral-800 p-4">
-              Yuri Pires Alves
-            </td>
-            <td className="border-t-2 border-t-neutral-700 bg-neutral-800 p-4">
-              21
-            </td>
-            <td className="border-t-2 border-t-neutral-700 bg-neutral-800 p-4">
-              Brazilian
-            </td>
-          </tr>
+          {players.map((player) => (
+            <tr>
+              <td className="border-t-2 border-t-neutral-700 bg-neutral-800 p-4">
+                {player.player.name}
+              </td>
+              <td className="border-t-2 border-t-neutral-700 bg-neutral-800 p-4">
+                {player.player.age}
+              </td>
+              <td className="border-t-2 border-t-neutral-700 bg-neutral-800 p-4">
+                {player.player.nationality}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 
 import { api } from "@/lib/api";
 import { CountryOption } from "../../components/CountryOption";
-import { Seasons } from "@/components/Seasons";
 
 interface Country {
   name: string;
@@ -31,10 +30,8 @@ export default async function Countries() {
 
   return (
     <div className="space-y-5 pb-16">
-      {/* @ts-expect-error Async Server Component */}
-      <Seasons />
       <h2 className="text-2xl font-bold">Escolha o país:</h2>
-      <div className="flex flex-wrap justify-start gap-4">
+      <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
         {countries.map((country) => (
           <CountryOption
             key={country.code}

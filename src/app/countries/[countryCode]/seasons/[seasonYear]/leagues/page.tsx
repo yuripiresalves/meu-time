@@ -16,7 +16,7 @@ interface LeaguesResponse {
 export default async function Leagues({
   params,
 }: {
-  params: { countryCode: string };
+  params: { countryCode: string; seasonYear: string };
 }) {
   // const isAuthenticated = getCookie("@meu-time:token-1.0.0");
 
@@ -26,18 +26,21 @@ export default async function Leagues({
 
   const token = getCookie("@meu-time:token-1.0.0");
 
-  const response = await api.get(`/leagues?code=${params.countryCode}`, {
-    headers: {
-      "x-rapidapi-key": token,
-    },
-  });
+  const response = await api.get(
+    `/leagues?code=${params.countryCode}$season=${params.seasonYear}`,
+    {
+      headers: {
+        "x-rapidapi-key": token,
+      },
+    }
+  );
 
   const leaguesResponse: LeaguesResponse[] = response.data.response;
 
   return (
     <div className="space-y-5 pb-16">
       <h2 className="text-2xl font-bold">Escolha a liga:</h2>
-      <div className="flex flex-wrap justify-start gap-4">
+      <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
         {leaguesResponse.map((leagueResponse) => (
           <LeagueOption
             key={leagueResponse.league.id}
@@ -45,6 +48,7 @@ export default async function Leagues({
             id={leagueResponse.league.id}
             logo={leagueResponse.league.logo}
             countryCode={params.countryCode}
+            seasonYear={params.seasonYear}
           />
         ))}
       </div>

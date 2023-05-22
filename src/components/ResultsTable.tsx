@@ -1,6 +1,6 @@
 export function ResultsTable() {
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-3">
       <table className="w-full border-collapse">
         <thead className="text-center">
           <th className="rounded-tl-lg bg-neutral-700 p-4">J</th>

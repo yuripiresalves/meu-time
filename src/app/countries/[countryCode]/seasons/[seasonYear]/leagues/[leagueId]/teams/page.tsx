@@ -1,7 +1,6 @@
-import { LeagueOption } from "@/components/LeagueOption";
 import { TeamOption } from "@/components/TeamOption";
 import { api } from "@/lib/api";
-import { cookies } from "next/headers";
+import { getCookie } from "cookies-next";
 import { redirect } from "next/navigation";
 
 interface Team {
@@ -17,15 +16,15 @@ interface TeamsResponse {
 export default async function Teams({
   params,
 }: {
-  params: { countryCode: string; leagueId: string };
+  params: { countryCode: string; seasonYear: string; leagueId: string };
 }) {
-  // const isAuthenticated = cookies().has("@meu-time:token-1.0.0");
+  // const isAuthenticated = getCookie("@meu-time:token-1.0.0");
 
   // if (!isAuthenticated) {
   //   redirect("/");
   // }
 
-  const token = cookies().get("@meu-time:token-1.0.0")?.value;
+  const token = getCookie("@meu-time:token-1.0.0");
 
   const response = await api.get(
     `/teams?code=${params.countryCode}&league=${params.leagueId}`,
@@ -41,7 +40,7 @@ export default async function Teams({
   return (
     <div className="space-y-5 pb-16">
       <h2 className="text-2xl font-bold">Escolha o time:</h2>
-      <div className="flex flex-wrap justify-start gap-4">
+      <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
         {teamsResponse.map((teamResponse) => (
           <TeamOption
             key={teamResponse.team.id}
@@ -49,6 +48,7 @@ export default async function Teams({
             id={teamResponse.team.id}
             logo={teamResponse.team.logo}
             countryCode={params.countryCode}
+            seasonYear={params.seasonYear}
             leagueId={params.leagueId}
           />
         ))}
