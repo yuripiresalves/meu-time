@@ -52,7 +52,7 @@ export default async function Team({
         />
         <h2 className="text-2xl font-bold">{team?.name || "Corinthians"}</h2>
       </div>
-      <div className="flex flex-wrap justify-center pt-8 lg:justify-between">
+      <div className="flex flex-wrap justify-center gap-10 pt-8 md:justify-between lg:gap-0">
         {/* @ts-expect-error Async Server Component */}
         <PlayersList seasonYear={params.seasonYear} teamId={params.teamId} />
 
