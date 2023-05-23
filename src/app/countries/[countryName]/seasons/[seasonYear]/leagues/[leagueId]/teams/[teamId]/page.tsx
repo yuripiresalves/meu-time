@@ -73,7 +73,11 @@ export default async function Team({
 
         <div className="flex w-full max-w-[472px] items-center justify-center rounded-lg bg-neutral-800 p-4">
           {/* @ts-expect-error Async Server Component */}
-          <GoalsChart leagueId={params.leagueId} teamId={params.teamId} />
+          <GoalsChart
+            leagueId={params.leagueId}
+            teamId={params.teamId}
+            seasonsYear={params.seasonYear}
+          />
         </div>
       </div>
     </div>
