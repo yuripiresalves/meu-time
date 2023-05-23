@@ -1,9 +1,8 @@
-import { getCookie } from "cookies-next";
-
 import { redirect } from "next/navigation";
 
 import { api } from "@/lib/api";
 import { CountryOption } from "../../components/CountryOption";
+import { cookies } from "next/headers";
 
 interface Country {
   name: string;
@@ -12,9 +11,10 @@ interface Country {
 }
 
 export default async function Countries() {
-  const token = getCookie("@meu-time:token-1.0.0");
+  const isAuthenticated = cookies().has("@meu-time:token-1.0.0");
+  const token = cookies().get("@meu-time:token-1.0.0")?.value;
 
-  if (!token) {
+  if (!isAuthenticated) {
     redirect("/");
   }
 

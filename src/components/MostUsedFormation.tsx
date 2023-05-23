@@ -1,5 +1,5 @@
 import { api } from "@/lib/api";
-import { getCookie } from "cookies-next";
+import { cookies } from "next/headers";
 
 interface MostUsedFormationProps {
   seasonYear: string;
@@ -17,7 +17,7 @@ export async function MostUsedFormation({
   leagueId,
   seasonYear,
 }: MostUsedFormationProps) {
-  const token = getCookie("@meu-time:token-1.0.0");
+  const token = cookies().get("@meu-time:token-1.0.0")?.value;
   let mostPlayedFormation = "";
 
   try {

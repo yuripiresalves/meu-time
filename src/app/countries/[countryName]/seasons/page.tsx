@@ -1,13 +1,18 @@
-import { getCookie } from "cookies-next";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { api } from "@/lib/api";
 import { SeasonOption } from "@/components/SeasonOption";
 
-export default async function Seasons() {
-  const token = getCookie("@meu-time:token-1.0.0");
+export default async function Seasons({
+  params,
+}: {
+  params: { countryName: string };
+}) {
+  const isAuthenticated = cookies().has("@meu-time:token-1.0.0");
+  const token = cookies().get("@meu-time:token-1.0.0")?.value;
 
-  if (!token) {
+  if (!isAuthenticated) {
     redirect("/");
   }
 
@@ -31,7 +36,11 @@ export default async function Seasons() {
       <h1 className="font-sans text-2xl font-bold">Escolha a temporada:</h1>
       <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
         {seasons.map((season) => (
-          <SeasonOption key={season} year={season} />
+          <SeasonOption
+            key={season}
+            year={season}
+            countryName={params.countryName}
+          />
         ))}
       </div>
     </div>

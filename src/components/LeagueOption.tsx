@@ -5,7 +5,7 @@ interface LeagueOptionProps {
   name: string;
   id: string;
   logo: string;
-  countryCode: string;
+  countryName: string;
   seasonYear: string;
 }
 
@@ -13,7 +13,7 @@ export function LeagueOption({
   name,
   id,
   logo,
-  countryCode,
+  countryName,
   seasonYear,
 }: LeagueOptionProps) {
   const newName = name.substring(0, 10).concat("...");
@@ -21,7 +21,7 @@ export function LeagueOption({
   return (
     <div>
       <Link
-        href={`/countries/${countryCode}/seasons/${seasonYear}/leagues/${id}/teams`}
+        href={`/countries/${countryName}/seasons/${seasonYear}/leagues/${id}/teams`}
         title={name}
         className="flex w-40 flex-col items-center justify-center gap-4 rounded-lg border border-neutral-700 bg-neutral-800 px-4 py-5 text-center font-bold transition-colors hover:border-emerald-500"
       >

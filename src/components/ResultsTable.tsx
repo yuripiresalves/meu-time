@@ -1,5 +1,5 @@
 import { api } from "@/lib/api";
-import { getCookie } from "cookies-next";
+import { cookies } from "next/headers";
 
 interface ResultsTableProps {
   seasonsYear: string;
@@ -27,7 +27,7 @@ export async function ResultsTable({
   seasonsYear,
   teamId,
 }: ResultsTableProps) {
-  const token = getCookie("@meu-time:token-1.0.0");
+  const token = cookies().get("@meu-time:token-1.0.0")?.value;
 
   let results = {} as Results;
 

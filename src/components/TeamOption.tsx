@@ -5,7 +5,7 @@ interface TeamOptionProps {
   name: string;
   id: string;
   logo: string;
-  countryCode: string;
+  countryName: string;
   seasonYear: string;
   leagueId: string;
 }
@@ -14,7 +14,7 @@ export function TeamOption({
   name,
   id,
   logo,
-  countryCode,
+  countryName,
   seasonYear,
   leagueId,
 }: TeamOptionProps) {
@@ -23,7 +23,7 @@ export function TeamOption({
   return (
     <div>
       <Link
-        href={`/countries/${countryCode}/seasons/${seasonYear}/leagues/${leagueId}/teams/${id}`}
+        href={`/countries/${countryName}/seasons/${seasonYear}/leagues/${leagueId}/teams/${id}`}
         title={name}
         className="flex w-40 flex-col items-center justify-center gap-4 rounded-lg border border-neutral-700 bg-neutral-800 px-4 py-5 text-center font-bold transition-colors hover:border-emerald-500"
       >

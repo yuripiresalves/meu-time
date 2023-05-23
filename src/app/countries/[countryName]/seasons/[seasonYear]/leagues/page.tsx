@@ -1,6 +1,6 @@
 import { LeagueOption } from "@/components/LeagueOption";
 import { api } from "@/lib/api";
-import { getCookie } from "cookies-next";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 interface League {
@@ -16,22 +16,25 @@ interface LeaguesResponse {
 export default async function Leagues({
   params,
 }: {
-  params: { countryCode: string; seasonYear: string };
+  params: { countryName: string; seasonYear: string };
 }) {
-  const token = getCookie("@meu-time:token-1.0.0");
+  const isAuthenticated = cookies().has("@meu-time:token-1.0.0");
+  const token = cookies().get("@meu-time:token-1.0.0")?.value;
 
-  if (!token) {
+  if (!isAuthenticated) {
     redirect("/");
   }
 
   const response = await api.get(
-    `/leagues?code=${params.countryCode}$season=${params.seasonYear}`,
+    `/leagues?country=${params.countryName}&season=${params.seasonYear}`,
     {
       headers: {
         "x-rapidapi-key": token,
       },
     }
   );
+
+  console.log(response.data);
 
   const leaguesResponse: LeaguesResponse[] = response.data.response;
 
@@ -45,7 +48,7 @@ export default async function Leagues({
             name={leagueResponse.league.name}
             id={leagueResponse.league.id}
             logo={leagueResponse.league.logo}
-            countryCode={params.countryCode}
+            countryName={params.countryName}
             seasonYear={params.seasonYear}
           />
         ))}

@@ -1,6 +1,6 @@
 import { TeamOption } from "@/components/TeamOption";
 import { api } from "@/lib/api";
-import { getCookie } from "cookies-next";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 interface Team {
@@ -16,16 +16,17 @@ interface TeamsResponse {
 export default async function Teams({
   params,
 }: {
-  params: { countryCode: string; seasonYear: string; leagueId: string };
+  params: { countryName: string; seasonYear: string; leagueId: string };
 }) {
-  const token = getCookie("@meu-time:token-1.0.0");
+  const isAuthenticated = cookies().has("@meu-time:token-1.0.0");
+  const token = cookies().get("@meu-time:token-1.0.0")?.value;
 
-  if (!token) {
+  if (!isAuthenticated) {
     redirect("/");
   }
 
   const response = await api.get(
-    `/teams?code=${params.countryCode}&league=${params.leagueId}`,
+    `/teams?country=${params.countryName}&league=${params.leagueId}&season=${params.seasonYear}`,
     {
       headers: {
         "x-rapidapi-key": token,
@@ -45,7 +46,7 @@ export default async function Teams({
             name={teamResponse.team.name}
             id={teamResponse.team.id}
             logo={teamResponse.team.logo}
-            countryCode={params.countryCode}
+            countryName={params.countryName}
             seasonYear={params.seasonYear}
             leagueId={params.leagueId}
           />

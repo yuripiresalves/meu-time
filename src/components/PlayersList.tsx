@@ -1,5 +1,5 @@
 import { api } from "@/lib/api";
-import { getCookie } from "cookies-next";
+import { cookies } from "next/headers";
 
 interface Player {
   id: string;
@@ -18,7 +18,7 @@ interface PlayersListProps {
 }
 
 export async function PlayersList({ teamId, seasonYear }: PlayersListProps) {
-  const token = getCookie("@meu-time:token-1.0.0");
+  const token = cookies().get("@meu-time:token-1.0.0")?.value;
 
   let players: PlayerResponse[] = [];
 
@@ -31,7 +31,7 @@ export async function PlayersList({ teamId, seasonYear }: PlayersListProps) {
         },
       }
     );
-
+    console.log(playersResponse.data);
     players = playersResponse.data.response;
   } catch (error) {
     console.log(error);
@@ -49,7 +49,7 @@ export async function PlayersList({ teamId, seasonYear }: PlayersListProps) {
         </thead>
         <tbody>
           {players.map((player) => (
-            <tr>
+            <tr key={player.player.id}>
               <td className="border-t-2 border-t-neutral-700 bg-neutral-800 p-4">
                 {player.player.name}
               </td>

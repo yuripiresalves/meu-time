@@ -1,5 +1,5 @@
 import { api } from "@/lib/api";
-import { getCookie } from "cookies-next";
+import { cookies } from "next/headers";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
@@ -18,15 +18,16 @@ export default async function Team({
   params,
 }: {
   params: {
-    countryCode: string;
+    countryName: string;
     seasonYear: string;
     leagueId: string;
     teamId: string;
   };
 }) {
-  const token = getCookie("@meu-time:token-1.0.0");
+  const isAuthenticated = cookies().has("@meu-time:token-1.0.0");
+  const token = cookies().get("@meu-time:token-1.0.0")?.value;
 
-  if (!token) {
+  if (!isAuthenticated) {
     redirect("/");
   }
 
@@ -57,7 +58,11 @@ export default async function Team({
 
         <div className="flex w-[350px] flex-col gap-10">
           {/* @ts-expect-error Async Server Component */}
-          <ResultsTable />
+          <ResultsTable
+            leagueId={params.leagueId}
+            seasonsYear={params.seasonYear}
+            teamId={params.teamId}
+          />
           {/* @ts-expect-error Async Server Component */}
           <MostUsedFormation
             leagueId={params.leagueId}
