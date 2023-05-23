@@ -34,7 +34,7 @@ A aplicação foi colocada em produção utilizando os serviços da Vercel, empr
 ## :art: Protótipo
 
 <p>
-  Para a criação e organização da interface visual do projeto, utilzei o Figma para criar um protótipo que me guiasse durante o desenvolvimento e que tivesse uma boa experiência para o usuário, 
+  Para a criação e organização da interface visual do projeto, utilizei o Figma para criar um protótipo que me guiasse durante o desenvolvimento e que tivesse uma boa experiência para o usuário, 
   assim como uma interface simples e intuitíva. Para acessar o protótipo, <a href="https://www.figma.com/file/vPAXLtqPUE51kaeIA2kDzp/Meu-Time?type=design&node-id=0-1&t=LcB014gJSJHMkq7r-0" target="_blank">clique aqui</a>.
 </p>
 
