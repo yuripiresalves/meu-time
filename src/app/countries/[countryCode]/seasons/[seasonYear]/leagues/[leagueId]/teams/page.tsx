@@ -18,13 +18,11 @@ export default async function Teams({
 }: {
   params: { countryCode: string; seasonYear: string; leagueId: string };
 }) {
-  // const isAuthenticated = getCookie("@meu-time:token-1.0.0");
-
-  // if (!isAuthenticated) {
-  //   redirect("/");
-  // }
-
   const token = getCookie("@meu-time:token-1.0.0");
+
+  if (!token) {
+    redirect("/");
+  }
 
   const response = await api.get(
     `/teams?code=${params.countryCode}&league=${params.leagueId}`,

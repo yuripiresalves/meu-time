@@ -1,4 +1,51 @@
-export function ResultsTable() {
+import { api } from "@/lib/api";
+import { getCookie } from "cookies-next";
+
+interface ResultsTableProps {
+  seasonsYear: string;
+  teamId: string;
+  leagueId: string;
+}
+
+interface Results {
+  played: {
+    total: number;
+  };
+  wins: {
+    total: number;
+  };
+  draws: {
+    total: number;
+  };
+  loses: {
+    total: number;
+  };
+}
+
+export async function ResultsTable({
+  leagueId,
+  seasonsYear,
+  teamId,
+}: ResultsTableProps) {
+  const token = getCookie("@meu-time:token-1.0.0");
+
+  let results = {} as Results;
+
+  try {
+    const resultsResponse = await api.get(
+      `/teams/statistics?team=${teamId}&league=${leagueId}&season=${seasonsYear}`,
+      {
+        headers: {
+          "x-rapidapi-key": token,
+        },
+      }
+    );
+
+    results = resultsResponse.data.response.fixtures;
+  } catch (error) {
+    console.log(error);
+  }
+
   return (
     <div className="flex flex-col gap-3">
       <table className="w-full border-collapse">
@@ -11,16 +58,16 @@ export function ResultsTable() {
         <tbody className="text-center">
           <tr>
             <td className="rounded-bl-lg border-t-2 border-t-neutral-600 bg-neutral-800 p-4">
-              10
+              {results.played.total}
             </td>
             <td className="border-t-2 border-t-neutral-600 bg-neutral-800 p-4">
-              6
+              {results.wins.total}
             </td>
             <td className="border-t-2 border-t-neutral-600 bg-neutral-800 p-4">
-              3
+              {results.draws.total}
             </td>
             <td className="rounded-br-lg border-t-2 border-t-neutral-600 bg-neutral-800 p-4">
-              1
+              {results.loses.total}
             </td>
           </tr>
         </tbody>

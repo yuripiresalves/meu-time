@@ -1,10 +1,15 @@
 import { getCookie } from "cookies-next";
+import { redirect } from "next/navigation";
 
 import { api } from "@/lib/api";
 import { SeasonOption } from "@/components/SeasonOption";
 
 export default async function Seasons() {
   const token = getCookie("@meu-time:token-1.0.0");
+
+  if (!token) {
+    redirect("/");
+  }
 
   const response = await api.get("/leagues/seasons", {
     headers: {

@@ -12,13 +12,11 @@ interface Country {
 }
 
 export default async function Countries() {
-  // const isAuthenticated = getCookie("@meu-time:token-1.0.0");
-
-  // if (!isAuthenticated) {
-  //   redirect("/");
-  // }
-
   const token = getCookie("@meu-time:token-1.0.0");
+
+  if (!token) {
+    redirect("/");
+  }
 
   const response = await api.get("/countries", {
     headers: {

@@ -24,13 +24,11 @@ export default async function Team({
     teamId: string;
   };
 }) {
-  // const isAuthenticated = getCookie("@meu-time:token-1.0.0");
-
-  // if (!isAuthenticated) {
-  //   redirect("/");
-  // }
-
   const token = getCookie("@meu-time:token-1.0.0");
+
+  if (!token) {
+    redirect("/");
+  }
 
   const teamResponse = await api.get(`/teams?id=${params.teamId}`, {
     headers: {
@@ -58,6 +56,7 @@ export default async function Team({
         <PlayersList seasonYear={params.seasonYear} teamId={params.teamId} />
 
         <div className="flex w-[350px] flex-col gap-10">
+          {/* @ts-expect-error Async Server Component */}
           <ResultsTable />
           {/* @ts-expect-error Async Server Component */}
           <MostUsedFormation

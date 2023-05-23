@@ -18,13 +18,11 @@ export default async function Leagues({
 }: {
   params: { countryCode: string; seasonYear: string };
 }) {
-  // const isAuthenticated = getCookie("@meu-time:token-1.0.0");
-
-  // if (!isAuthenticated) {
-  //   redirect("/");
-  // }
-
   const token = getCookie("@meu-time:token-1.0.0");
+
+  if (!token) {
+    redirect("/");
+  }
 
   const response = await api.get(
     `/leagues?code=${params.countryCode}$season=${params.seasonYear}`,
