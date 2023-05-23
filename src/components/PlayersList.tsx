@@ -38,7 +38,7 @@ export async function PlayersList({ teamId, seasonYear }: PlayersListProps) {
   }
 
   return (
-    <div className="relative -z-10 h-96 max-w-[340px] overflow-y-scroll">
+    <div className="relative h-96 max-w-[340px] overflow-y-scroll">
       <table className="w-full border-collapse">
         <thead className="text-left">
           <th className="sticky top-0 rounded-tl-lg bg-indigo-800 p-4">Nome</th>

@@ -58,16 +58,16 @@ export async function ResultsTable({
         <tbody className="text-center">
           <tr>
             <td className="rounded-bl-lg border-t-2 border-t-neutral-600 bg-neutral-800 p-4">
-              {results.played.total}
+              {results?.played.total}
             </td>
             <td className="border-t-2 border-t-neutral-600 bg-neutral-800 p-4">
-              {results.wins.total}
+              {results?.wins.total}
             </td>
             <td className="border-t-2 border-t-neutral-600 bg-neutral-800 p-4">
-              {results.draws.total}
+              {results?.draws.total}
             </td>
             <td className="rounded-br-lg border-t-2 border-t-neutral-600 bg-neutral-800 p-4">
-              {results.loses.total}
+              {results?.loses.total}
             </td>
           </tr>
         </tbody>

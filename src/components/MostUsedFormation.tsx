@@ -22,7 +22,7 @@ export async function MostUsedFormation({
 
   try {
     const lineupsResponse = await api.get(
-      `/teams/statistics?team=${teamId}&league=${leagueId}&season=${seasonYear}}`,
+      `/teams/statistics?team=${teamId}&league=${leagueId}&season=${seasonYear}`,
       {
         headers: {
           "x-rapidapi-key": token,
