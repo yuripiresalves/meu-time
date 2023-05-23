@@ -37,7 +37,7 @@ export default async function Team({
     },
   });
 
-  const team: Team = teamResponse.data.response.team;
+  const team: Team = teamResponse.data.response[0].team;
 
   return (
     <div className="space-y-5 pb-16">
