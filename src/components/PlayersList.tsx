@@ -41,11 +41,15 @@ export async function PlayersList({ teamId, seasonYear }: PlayersListProps) {
     <div className="relative h-96 max-w-[340px] overflow-y-scroll">
       <table className="w-full border-collapse">
         <thead className="text-left">
-          <th className="sticky top-0 rounded-tl-lg bg-indigo-800 p-4">Nome</th>
-          <th className="sticky top-0 bg-indigo-800 p-4">Idade</th>
-          <th className="sticky top-0 rounded-tr-lg bg-indigo-800 p-4">
-            Nacionalidade
-          </th>
+          <tr>
+            <th className="sticky top-0 rounded-tl-lg bg-indigo-800 p-4">
+              Nome
+            </th>
+            <th className="sticky top-0 bg-indigo-800 p-4">Idade</th>
+            <th className="sticky top-0 rounded-tr-lg bg-indigo-800 p-4">
+              Nacionalidade
+            </th>
+          </tr>
         </thead>
         <tbody>
           {players.map((player) => (

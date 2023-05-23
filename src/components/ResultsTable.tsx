@@ -50,10 +50,12 @@ export async function ResultsTable({
     <div className="flex flex-col gap-3">
       <table className="w-full border-collapse">
         <thead className="text-center">
+          <tr>
           <th className="rounded-tl-lg bg-neutral-700 p-4">J</th>
           <th className="bg-emerald-700 p-4">V</th>
           <th className="bg-amber-700 p-4">E</th>
           <th className="rounded-tr-lg bg-rose-700 p-4">D</th>
+          </tr>
         </thead>
         <tbody className="text-center">
           <tr>
