@@ -1,34 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<img src="https://i.ibb.co/tbXkbrW/meutime.png" alt="Meu Time" />
+<p align="center">
+  <a href="https://linkedin.com/in/yuripiresalves">
+    <img src="https://img.shields.io/badge/made%20by-Yuri%20Alves-1e78b7" alt="Made by Yuri Alves">
+  </a>
+</p>
 
-## Getting Started
+## :pushpin: Conteúdo
 
-First, run the development server:
+<p align="center">
+  <a href="#thinking-o-que-é">O que é</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#desktop_computer-deploy">Deploy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#art-protótipo">Protótipo</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#rocket-tecnologias-utilizadas">Tecnologias utilizadas</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#construction_worker-execução-local">Execução local</a>
+</p>
+
+<br/>
+
+## :thinking: O que é
+
+O Meu Time é uma aplicação criada para consultar dados de um time, escolhendo seu país, ligua e temporada :soccer:. Ela utilizada os dados fornecidos pela [API Football](https://dashboard.api-football.com/), 
+que na sua versão gratuita possui um limite de 100 requisições por dia.
+<br/>
+<br/>
+Esta aplicação faz parte de um teste técnico da empresa [Trade Technology](https://www.linkedin.com/company/trade-technology/).
+
+<!-- <hr/> -->
+
+## :desktop_computer: Deploy
+
+A aplicação foi colocada em produção utilizando os serviços da Vercel, empresa responsável pelo Next.js, e pode ser acessada pelo link: https://meu-time-yuripiresalves.vercel.app/
+
+## :art: Protótipo
+
+<p>
+  Para a criação e organização da interface visual do projeto, utilzei o Figma para criar um protótipo que me guiasse durante o desenvolvimento e que tivesse uma boa experiência para o usuário, 
+  assim como uma interface simples e intuitíva. Para acessar o protótipo, <a href="https://www.figma.com/file/vPAXLtqPUE51kaeIA2kDzp/Meu-Time?type=design&node-id=0-1&t=LcB014gJSJHMkq7r-0" target="_blank">clique aqui</a>.
+</p>
+
+## :rocket: Tecnologias utilizadas
+
+- **ReactJS**
+- **Next.js 13**
+- **TypeScript**
+- **Tailwind CSS**
+
+## :construction_worker: Execução local
+
+Para executar essa aplicação você precisará ter instalado em sua máquina o [Git][git] e [Node][node].
+
+Uma conta gratuita no site [API Football](https://dashboard.api-football.com/register) precisará ser criada para obter uma API Key, que será usada como login na aplicação e também para
+realizar as requisições à API.
+
+<p>Após isso, siga os passos abaixo:</p>
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+# No terminal, clone o repositório com o comando:
+$ git clone https://github.com/yuripiresalves/meu-time
+
+# Entre no diretório:
+$ cd meu-time
+
+# Instale as dependências
+$ npm install
+
+# Execute a aplicação:
+$ npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* A aplicação estará sendo executada na porta 3000 (http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Feito com :blue_heart: por [Yuri Alves](https://linkedin.com/in/yuripiresalves)
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[git]: https://git-scm.com/
+[node]: https://nodejs.org/en
