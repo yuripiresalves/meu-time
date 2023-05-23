@@ -52,11 +52,11 @@ export default async function Team({
         />
         <h2 className="text-2xl font-bold">{team?.name || "Corinthians"}</h2>
       </div>
-      <div className="flex flex-wrap justify-center gap-10 pt-8 lg:justify-start">
+      <div className="flex flex-wrap justify-center pt-8 lg:justify-between">
         {/* @ts-expect-error Async Server Component */}
         <PlayersList seasonYear={params.seasonYear} teamId={params.teamId} />
 
-        <div className="flex w-[350px] flex-col gap-10">
+        <div className="flex w-[300px] flex-col gap-10">
           {/* @ts-expect-error Async Server Component */}
           <ResultsTable
             leagueId={params.leagueId}
@@ -71,7 +71,7 @@ export default async function Team({
           />
         </div>
 
-        <div className="flex w-full max-w-[472px] items-center justify-center rounded-lg bg-neutral-800 p-4">
+        <div className="flex w-full max-w-[500px] items-center justify-center rounded-lg bg-neutral-800 p-4">
           {/* @ts-expect-error Async Server Component */}
           <GoalsChart
             leagueId={params.leagueId}

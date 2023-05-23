@@ -73,7 +73,7 @@ export async function ResultsTable({
         </tbody>
       </table>
 
-      <div className="flex justify-between">
+      <div className="flex justify-between text-xs">
         <div className="flex items-center gap-2">
           <div className="h-2 w-2 rounded-full bg-neutral-700" />
           <span>Jogos</span>
