@@ -20,7 +20,7 @@
 ## :thinking: O que é
 
 O Meu Time é uma aplicação criada para consultar dados de um time, escolhendo seu país, ligua e temporada :soccer:. Ela utilizada os dados fornecidos pela [API Football](https://dashboard.api-football.com/), 
-que na sua versão gratuita possui um limite de 100 requisições por dia.
+que na sua versão gratuita possui um limite de 100 requisições por dia. Como a nova versão do Next.js saiu há poucas semanas, aproveitei essa oportunidade para estudar as novidades dessa versão aplicando elas neste projeto. 🚀
 <br/>
 <br/>
 Esta aplicação faz parte de um teste técnico da empresa [Trade Technology](https://www.linkedin.com/company/trade-technology/).
