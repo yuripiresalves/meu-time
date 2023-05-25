@@ -9,7 +9,8 @@
 
 <p align="center">
   <a href="#thinking-o-que-é">O que é</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#desktop_computer-deploy">Deploy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#desktop_computer-demonstração">Demonstração</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#gear-deploy">Deploy</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#art-protótipo">Protótipo</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#rocket-tecnologias-utilizadas">Tecnologias utilizadas</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#construction_worker-execução-local">Execução local</a>
@@ -25,9 +26,11 @@ que na sua versão gratuita possui um limite de 100 requisições por dia. Como 
 <br/>
 Esta aplicação faz parte de um teste técnico da empresa [Trade Technology](https://www.linkedin.com/company/trade-technology/).
 
-<!-- <hr/> -->
+## :desktop_computer: Demonstração
 
-## :desktop_computer: Deploy
+<img src="https://i.ibb.co/XFV9dgv/meutime.gif" alt="Meu Time"/>
+
+## :gear: Deploy
 
 A aplicação foi colocada em produção utilizando os serviços da Vercel, empresa responsável pelo Next.js, e pode ser acessada pelo link: https://meu-time-yuripiresalves.vercel.app/
 
